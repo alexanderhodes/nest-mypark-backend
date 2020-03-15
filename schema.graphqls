@@ -1,0 +1,19 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Query {
+  allUsers: [User!]!
+}
+
+type User {
+  id: ID!
+  name: String!
+  password: String!
+  username: String!
+  first_name: String!
+  last_name: String!
+  enabled: Boolean!
+  private_email: String!
+  f_parking_space: String!
+}

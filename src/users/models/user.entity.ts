@@ -1,25 +1,38 @@
-import {Column, Entity, PrimaryColumn} from "typeorm";
+import {Column, Entity, JoinColumn, OneToOne, PrimaryColumn} from "typeorm";
+import {Field, ID, ObjectType} from "@nestjs/graphql";
+import {ParkingSpace} from "./parking-space.entity";
 
-@Entity()
+@ObjectType()
+@Entity({name: "users"})
 export class User {
 
+    @Field(type => ID,  { nullable: true })
     @PrimaryColumn()
     id: string;
+    @Field( { nullable: true })
     @Column()
     name: string;
+    @Field( { nullable: true })
     @Column()
     password: string;
+    @Field( { nullable: true })
     @Column()
     username: string;
-    @Column()
+    @Field({nullable: true})
+    @Column({nullable: true, name: "first_name"})
     firstName: string;
-    @Column()
+    @Field({nullable: true})
+    @Column({nullable: true, name: "last_name"})
     lastName: string;
+    @Field( { nullable: true })
     @Column()
     enabled: boolean;
-    @Column()
+    @Field({nullable: true})
+    @Column({nullable: true, name: "private_email"})
     privateEmail: string;
-    @Column()
-    parkingSpace: number;
+    @Field({nullable: true})
+    @OneToOne(type => ParkingSpace, { cascade: true })
+    @JoinColumn({name: "parkingSpaceId", referencedColumnName: "id"})
+    parkingSpace: ParkingSpace;
 
 }

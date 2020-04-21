@@ -2,18 +2,75 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Absence {
+  id: ID!
+  user: User!
+  start: String!
+  end: String!
+}
+
+type Booking {
+  id: ID
+  user: User
+  parkingSpace: ParkingSpace
+  date: String
+  bookingStatus: BookingStatus
+}
+
+type BookingStatus {
+  id: ID
+  name: String
+  color: String
+}
+
+type ParkingSpace {
+  id: ID
+  number: String
+  parkingSpaceStatus: ParkingSpaceStatus
+}
+
+type ParkingSpaceStatus {
+  id: ID
+  name: String
+  color: String
+}
+
 type Query {
+  findAllAbsences: [Absence!]!
+  findAbsencesByUser(userId: String!): [Absence!]!
+  findBookings: [Booking!]!
+  findBookingsByUser(userId: String!): [Booking!]!
+  allParkingSpaces: [ParkingSpace!]!
+  findParkingSpaceById(id: String!): ParkingSpace
+  findSeriesAbsenceByUser: [SeriesAbsence!]!
+  findSeriesBookingByUser: [SeriesBooking!]!
   allUsers: [User!]!
+  findUserById(id: String!): User
+}
+
+type SeriesAbsence {
+  id: ID!
+  user: User!
+  active: Boolean!
+  weekday: Float!
+}
+
+type SeriesBooking {
+  id: ID!
+  user: User!
+  active: Boolean!
+  time: String!
+  weekday: Float!
 }
 
 type User {
-  id: ID!
-  name: String!
-  password: String!
-  username: String!
-  first_name: String!
-  last_name: String!
-  enabled: Boolean!
-  private_email: String!
-  f_parking_space: String!
+  id: ID
+  name: String
+  password: String
+  username: String
+  firstName: String
+  lastName: String
+  enabled: Boolean
+  privateEmail: String
+  parkingSpace: ParkingSpace
 }

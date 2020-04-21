@@ -1,5 +1,6 @@
 import {Field, ID, ObjectType} from "@nestjs/graphql";
-import {Column, Entity, PrimaryColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryColumn} from "typeorm";
+import {User} from "./user.entity";
 
 @ObjectType()
 @Entity({name: "seriesabsence"})
@@ -9,13 +10,13 @@ export class SeriesAbsence {
     @PrimaryColumn()
     id: string;
     @Field()
+    @ManyToOne(type => User)
+    @JoinColumn()
+    user: User;
+    @Field()
     @Column()
     active: boolean;
     @Field()
     @Column()
-    time: string;
-    @Field()
-    @Column()
     weekday: number;
-
 }
